@@ -1,4 +1,6 @@
-package kubiks.aoc;
+package kubiks.aoc.day1;
+
+import kubiks.aoc.utils.FileReaderUtils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -9,7 +11,7 @@ public class Day1 {
     List<Integer> data;
 
     public Day1(String fileName) throws FileNotFoundException {
-        data = readListFromFile(fileName);
+        data = FileReaderUtils.readIntegerListFromFile(fileName);
         System.out.println("Input: " + data.toString());
     }
 
@@ -64,15 +66,6 @@ public class Day1 {
             }
         }
         throw new Exception("Target sum not found");
-    }
-
-    public static List<Integer> readListFromFile(String fileName) throws FileNotFoundException {
-        Scanner s = new Scanner(new File(fileName));
-        List<Integer>data = new ArrayList<Integer>();
-        while (s.hasNextInt()) {
-            data.add(s.nextInt());
-        }
-        return data;
     }
 
     public static void main(String[] args) throws Exception {
