@@ -17,8 +17,14 @@ public class FileReaderUtils {
         return data;
     }
 
-    public static List<String> readStringListFromFile(String fileName) throws FileNotFoundException {
-        BufferedReader br = new BufferedReader(new FileReader(fileName));
+    public static List<String> readStringListFromFile(String fileName) {
+        BufferedReader br;
+        try {
+            br = new BufferedReader(new FileReader(fileName));
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace();
+            return null;
+        }
         List<String> data = br.lines().collect(Collectors.toList());
         return data;
     }
