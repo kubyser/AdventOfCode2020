@@ -1,9 +1,6 @@
 package kubiks.aoc.utils;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -24,6 +21,49 @@ public class FileReaderUtils {
         BufferedReader br = new BufferedReader(new FileReader(fileName));
         List<String> data = br.lines().collect(Collectors.toList());
         return data;
+    }
+
+    public static List<String> readWithDoubleCr(String fileName) {
+        BufferedReader br;
+        try {
+            br = new BufferedReader(new FileReader(fileName));
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+        ArrayList<String> list = new ArrayList<>();
+        String s;
+        try {
+            s = br.readLine();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+        String fullS = null;
+        while (s != null) {
+            if (s.length() == 0) {
+                if (fullS != null) {
+                    list.add(fullS);
+                }
+                fullS = null;
+            } else {
+                if (fullS == null) {
+                    fullS = s;
+                } else {
+                    fullS = fullS + " " + s;
+                }
+            }
+            try {
+                s = br.readLine();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+                return null;
+            }
+        }
+        if (fullS != null) {
+            list.add(fullS);
+        }
+        return list;
     }
 
 }
