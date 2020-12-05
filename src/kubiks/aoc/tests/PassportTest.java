@@ -34,38 +34,38 @@ class PassportTest {
 
     @Test
     void validateByr() {
-        assertTrue(Passport.validateByr("2002"));
-        assertFalse(Passport.validateByr("2003"));
-        assertFalse(Passport.validateByr("02002"));
-        assertFalse(Passport.validateByr("2002a"));
+        assertTrue(Passport.validateField("2002", "byr"));
+        assertFalse(Passport.validateField("2003", "byr"));
+        assertFalse(Passport.validateField("02002", "byr"));
+        assertFalse(Passport.validateField("2002a", "byr"));
     }
 
     @Test
     void validateHgt() {
-        assertTrue(Passport.validateHgt("60in"));
-        assertTrue(Passport.validateHgt("190cm"));
-        assertFalse(Passport.validateHgt("190in"));
-        assertFalse(Passport.validateHgt("cm190"));
-        assertFalse(Passport.validateHgt("190cm1"));
+        assertTrue(Passport.validateField("60in", "hgt"));
+        assertTrue(Passport.validateField("190cm", "hgt"));
+        assertFalse(Passport.validateField("190in", "hgt"));
+        assertFalse(Passport.validateField("cm190", "hgt"));
+        assertFalse(Passport.validateField("190cm1", "hgt"));
     }
 
     @Test
     void validateHcl() {
-        assertTrue(Passport.validateHcl("#123abc"));
-        assertFalse(Passport.validateHcl("#123abz"));
-        assertFalse(Passport.validateHcl("123abc"));
+        assertTrue(Passport.validateField("#123abc", "hcl"));
+        assertFalse(Passport.validateField("#123abz", "hcl"));
+        assertFalse(Passport.validateField("123abc", "hcl"));
     }
 
     @Test
     void validateEcl() {
-        assertTrue(Passport.validateEcl("brn"));
-        assertFalse(Passport.validateEcl("wat"));
+        assertTrue(Passport.validateField("brn", "ecl"));
+        assertFalse(Passport.validateField("wat", "ecl"));
     }
 
     @Test
     void validatePid() {
-        assertTrue(Passport.validatePid("000000001"));
-        assertFalse(Passport.validatePid("0123456789"));
+        assertTrue(Passport.validateField("000000001", "pid"));
+        assertFalse(Passport.validateField("0123456789", "pid"));
     }
 
     @Test

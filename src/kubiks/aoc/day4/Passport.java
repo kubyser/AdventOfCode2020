@@ -31,52 +31,37 @@ public class Passport {
                 data.containsKey("pid");
     }
 
-    public static boolean validateByr(String value) {
-        return value.matches("[0-9]{4}") &&
-                Integer.parseInt(value) >= 1920 && Integer.parseInt(value) <= 2002;
-    }
-
-    public static boolean validateIyr(String value) {
-        return value.matches("[0-9]{4}") &&
-                Integer.parseInt(value) >= 2010 && Integer.parseInt(value) <= 2020;
-    }
-
-    public static boolean validateEyr(String value) {
-        return value.matches("[0-9]{4}") &&
-                Integer.parseInt(value) >= 2020 && Integer.parseInt(value) <= 2030;
-    }
-
-    public static boolean validateHgt(String value) {
-        if (!value.matches("[0-9]+(cm|in)")) {
-            return false;
+    public static boolean validateField(String value, String field) {
+        switch (field) {
+            case "byr": return value.matches("[0-9]{4}") &&
+                    Integer.parseInt(value) >= 1920 && Integer.parseInt(value) <= 2002;
+            case "iyr": return value.matches("[0-9]{4}") &&
+                    Integer.parseInt(value) >= 2010 && Integer.parseInt(value) <= 2020;
+            case "eyr": return value.matches("[0-9]{4}") &&
+                    Integer.parseInt(value) >= 2020 && Integer.parseInt(value) <= 2030;
+            case "hgt": if (!value.matches("[0-9]+(cm|in)")) {
+                            return false;
+                        }
+                        int hgt = Integer.parseInt(value.substring(0, value.length() - 2));
+                        return value.indexOf("cm") >= 0 ? hgt >= 150 && hgt <= 193 : hgt >= 59 && hgt <= 76;
+            case "hcl": return value.matches("#[0-9a-f]{6}");
+            case "ecl": return value.matches("(amb|blu|brn|gry|grn|hzl|oth)");
+            case "pid": return value.matches("[0-9]{9}");
         }
-        int hgt = Integer.parseInt(value.substring(0, value.length() - 2));
-        return value.indexOf("cm") >= 0 ? hgt >= 150 && hgt <= 193 : hgt >= 59 && hgt <= 76;
-    }
-
-    public static boolean validateHcl(String value) {
-        return value.matches("#[0-9a-f]{6}");
-    }
-
-    public static boolean validateEcl(String value) {
-        return value.matches("(amb|blu|brn|gry|grn|hzl|oth)");
-    }
-
-    public static boolean validatePid(String value) {
-        return value.matches("[0-9]{9}");
+        return false;
     }
 
     public boolean validateAllFieldsExceptCid() {
         if (!areAllFieldsExceptCidPresent()) {
             return false;
         }
-        return validateByr(data.get("byr")) &&
-                validateIyr(data.get("iyr")) &&
-                validateEyr(data.get("eyr")) &&
-                validateHgt(data.get("hgt")) &&
-                validateHcl(data.get("hcl")) &&
-                validateEcl(data.get("ecl")) &&
-                validatePid(data.get("pid"));
+        return validateField(data.get("byr"),"byr") &&
+                validateField(data.get("iyr"), "iyr") &&
+                validateField(data.get("eyr"), "eyr") &&
+                validateField(data.get("hgt"), "hgt") &&
+                validateField(data.get("hcl"), "hcl") &&
+                validateField(data.get("ecl"), "ecl") &&
+                validateField(data.get("pid"), "pid");
     }
 
 }
