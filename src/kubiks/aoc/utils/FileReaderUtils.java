@@ -29,7 +29,7 @@ public class FileReaderUtils {
         return data;
     }
 
-    public static List<String> readWithDoubleCr(String fileName) {
+    public static List<String> readWithDoubleCr(String fileName, boolean crToSpace) {
         BufferedReader br;
         try {
             br = new BufferedReader(new FileReader(fileName));
@@ -56,7 +56,7 @@ public class FileReaderUtils {
                 if (fullS == null) {
                     fullS = s;
                 } else {
-                    fullS = fullS + " " + s;
+                    fullS = crToSpace ? fullS + " " + s : fullS + s;
                 }
             }
             try {

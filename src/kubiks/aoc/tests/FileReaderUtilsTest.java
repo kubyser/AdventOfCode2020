@@ -30,7 +30,7 @@ class FileReaderUtilsTest {
 
     @Test
     void readWithDoubleCr() {
-        List<String> data = FileReaderUtils.readWithDoubleCr("resources/day4_test_input.txt");
+        List<String> data = FileReaderUtils.readWithDoubleCr("resources/day4_test_input.txt", true);
         assertEquals(4, data.size());
         assertEquals("ecl:gry pid:860033327 eyr:2020 hcl:#fffffd byr:1937 iyr:2017 cid:147 hgt:183cm", data.get(0));
         assertEquals("iyr:2013 ecl:amb cid:350 eyr:2023 pid:028048884 hcl:#cfa07d byr:1929", data.get(1));
@@ -39,5 +39,12 @@ class FileReaderUtilsTest {
                 " ecl:brn pid:760753108 byr:1931" +
                 " hgt:179cm", data.get(2));
         assertEquals("hcl:#cfa07d eyr:2025 pid:166559648 iyr:2011 ecl:brn hgt:59in", data.get(3));
+        data = FileReaderUtils.readWithDoubleCr("resources/day6_test_input.txt", false);
+        assertEquals(5, data.size());
+        assertEquals("abc", data.get(0));
+        assertEquals("abc", data.get(1));
+        assertEquals("abac", data.get(2));
+        assertEquals("aaaa", data.get(3));
+        assertEquals("b", data.get(4));
     }
 }

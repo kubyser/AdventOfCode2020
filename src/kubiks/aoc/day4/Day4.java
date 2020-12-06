@@ -26,7 +26,7 @@ public class Day4 {
     }
 
     public static void main(String[] args) {
-        Day4 day4 = new Day4(FileReaderUtils.readWithDoubleCr("resources/day4_input.txt"));
+        Day4 day4 = new Day4(FileReaderUtils.readWithDoubleCr("resources/day4_input.txt", true));
         int answer = day4.countValid(false);
         System.out.format("Answer: %d\n", answer);
         answer = day4.countValid(true);
