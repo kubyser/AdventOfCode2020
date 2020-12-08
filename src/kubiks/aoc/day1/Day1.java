@@ -12,7 +12,7 @@ public class Day1 {
 
     public Day1(String fileName) throws FileNotFoundException {
         data = FileReaderUtils.readIntegerListFromFile(fileName);
-        System.out.println("Input: " + data.toString());
+        //System.out.println("Input: " + data.toString());
     }
 
     public Day1(List<Integer> data) {
@@ -26,7 +26,7 @@ public class Day1 {
     public int solve(int target, boolean triple) throws Exception {
         List<Integer> sortedData = new ArrayList<Integer>(data);
         sortedData.sort(Integer::compareTo);
-        System.out.println("Sorted input: " + sortedData.toString());
+        //System.out.println("Sorted input: " + sortedData.toString());
         ListIterator i = sortedData.listIterator();
         int step = 0;
         while (i.hasNext()) {
@@ -40,7 +40,7 @@ public class Day1 {
                 int sum = a + b;
                 if (!triple) {
                     step++;
-                    System.out.format("%d: a=%d, b=%d, sum=%d\n", step, a, b, sum);
+                    //System.out.format("%d: a=%d, b=%d, sum=%d\n", step, a, b, sum);
                     if (sum == target) {
                         return a * b;
                     }
@@ -54,7 +54,7 @@ public class Day1 {
                         int c = (int) j.next();
                         int sumTriple = sum + c;
                         step++;
-                        System.out.format("%d: a=%d, b=%d, c=%d, sum=%d\n", step, a, b, c, sumTriple);
+                        //System.out.format("%d: a=%d, b=%d, c=%d, sum=%d\n", step, a, b, c, sumTriple);
                         if (sumTriple == target) {
                             return a * b * c;
                         }

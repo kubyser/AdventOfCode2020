@@ -29,9 +29,7 @@ public class Day2 {
             String password = extractPasswordString(s);
             if (useNewPolicy ?  policy.stringMatchesNewPolicy(password) : policy.stringMatchesOldPolicy(password)) {
                 answer++;
-                System.out.format("OK  Match: %s, total=%d\n", s, answer);
-            } else {
-                System.out.format("NOT Match: %s, total=%d\n", s, answer);
+                //System.out.format("OK  Match: %s, total=%d\n", s, answer);
             }
         }
         return answer;
