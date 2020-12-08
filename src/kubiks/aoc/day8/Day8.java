@@ -17,10 +17,10 @@ public class Day8 {
     public int solvePart2() throws Exception {
         for (int i=0; i<computer.getProgram().size(); i++) {
             String command = computer.getProgram().get(i);
-            if (command.split(" ")[0].equals("nop")) {
-                computer.getProgram().set(i, "jmp "+command.split(" ")[1]);
-            } else if (command.split(" ")[0].equals("jmp")) {
-                computer.getProgram().set(i, "nop "+command.split(" ")[1]);
+            if (command.split(" ")[0].equals(Computer.Instruction.NOP.code)) {
+                computer.getProgram().set(i, Computer.Instruction.JMP.code+" "+command.split(" ")[1]);
+            } else if (command.split(" ")[0].equals(Computer.Instruction.JMP.code)) {
+                computer.getProgram().set(i, Computer.Instruction.NOP.code+" "+command.split(" ")[1]);
             } else {
                 continue;
             }
