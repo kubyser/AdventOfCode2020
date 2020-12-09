@@ -12,15 +12,25 @@ import static org.junit.jupiter.api.Assertions.*;
 class FileReaderUtilsTest {
 
     @org.junit.jupiter.api.Test
-    void readListFromFile() throws FileNotFoundException {
+    void readIntegerListFromFile() {
         List<Integer> data = FileReaderUtils.readIntegerListFromFile("resources/day1_test_input.txt");
         assertEquals(10, data.size());
         assertEquals(1975, data.get(0));
         assertEquals(1933, data.get(9));
     }
 
+    @org.junit.jupiter.api.Test
+    void readLongListFromFile() {
+        List<Long> data = FileReaderUtils.readLongListFromFile("resources/longlist.txt");
+        assertEquals(12, data.size());
+        assertEquals(117452844395560L, data.get(0));
+        assertEquals(205596899114177L, data.get(9));
+        assertEquals(100610451401986L, data.get(11));
+    }
+
+
     @Test
-    void readStringListFromFile() throws FileNotFoundException {
+    void readStringListFromFile() {
         List<String> data = FileReaderUtils.readStringListFromFile("resources/day2_test_input.txt");
         assertEquals(3, data.size());
         assertEquals("1-3 a: abcde", data.get(0));
