@@ -117,9 +117,6 @@ public class WaitingRoom {
 
     public int getNumberOfNearestOccupiedNeighbors(int row, int col) {
         Set<IntVector2D> set = nearestNeighborsMap.get(row+":"+col);
-        if (set == null ){
-            return 0;
-        }
         return (int)set.stream().filter(e -> getSeatState(e.getX(), e.getY()) == SeatState.OCCUPIED).count();
     }
 

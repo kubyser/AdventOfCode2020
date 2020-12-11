@@ -130,6 +130,7 @@ class WaitingRoomTest {
         data.add("##...##");
         data.add("#.#.#.#");
         data.add(".##.##.");
+        room = new WaitingRoom(data);
         assertEquals(0, room.getNumberOfNearestOccupiedNeighbors(3, 3));
     }
 }
