@@ -22,7 +22,10 @@ class Day13Test {
 
     @Test
     void day13Part1() {
-        Day13 day13 = new Day13(FileReaderUtils.readStringListFromFile("resources/day13_input.txt"));
+        List<String> data = new ArrayList<>();
+        data.add("1000066");
+        data.add("13,x,x,41,x,x,x,37,x,x,x,x,x,659,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,19,x,x,x,23,x,x,x,x,x,29,x,409,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,17");
+        Day13 day13 = new Day13(data);
         assertEquals(246, day13.solvePart1());
     }
 

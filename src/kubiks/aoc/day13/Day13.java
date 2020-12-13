@@ -44,6 +44,7 @@ public class Day13 {
     public long solvePart2() {
         calculateMaxNumber();
 
+        long milestone = 1000000000L;
         calculateAdditions();
         long timestampMaxNumber = maxNumber;
         while (true) {
@@ -51,15 +52,21 @@ public class Day13 {
                 return timestampMaxNumber-maxIndex;
             }
             timestampMaxNumber += maxNumber;
+            if (timestampMaxNumber > milestone) {
+                System.out.println(milestone);
+                milestone += 1000000000L;
+            }
         }
     }
 
     boolean isTimestampAcceptable(long timestamp) {
-        for (int n=0; n<data.size(); n++) {
-            if (data.get(n) == -1) {
-                continue;
+        for (int n : runningSums.keySet()) {
+            long sum = runningSums.get(n);
+            while (sum < timestamp + n) {
+                sum += data.get(n);
             }
-            if ((timestamp+n) % data.get(n) != 0) {
+            runningSums.put(n, sum);
+            if (sum != timestamp + n) {
                 return false;
             }
         }
@@ -85,12 +92,16 @@ public class Day13 {
         for (int n: data.keySet()) {
             long value = data.get(n);
             additions.put(n,value *  maxNumber / value);
-            runningSums.put(n, 0L);
+            runningSums.put(n, value);
         }
     }
 
     public static void main(String[] args) {
-        Day13 day13 = new Day13(FileReaderUtils.readStringListFromFile("resources/day13_input.txt"));
+        List<String> data = new ArrayList<>();
+        data.add("1000066");
+        data.add("13,x,x,41,x,x,x,37,x,x,x,x,x,659,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,19,x,x,x,23,x,x,x,x,x,29,x,409,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,17");
+        Day13 day13 = new Day13(data);
+
         long answer = day13.solvePart1();
         System.out.format("Answer part 1: %d\n", answer);
         long answerPart2 = day13.solvePart2();
