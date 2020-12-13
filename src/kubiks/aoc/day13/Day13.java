@@ -7,11 +7,6 @@ import java.util.*;
 public class Day13 {
     long earliestTime;
     Map<Integer, Long> data;
-    Map<Integer, Long> runningSums;
-    Map<Integer, Long> additions;
-    long maxNumber;
-    int maxIndex;
-
 
     public Day13(List<String> earliestTimeAndTmetable) {
         earliestTime = Long.parseLong(earliestTimeAndTmetable.get(0));
@@ -56,43 +51,6 @@ public class Day13 {
             //System.out.format("Completed step %d, new start=%d, new step=%d\n", curN, start, step);
         }
         return start;
-    }
-
-    boolean isTimestampAcceptable(long timestamp) {
-        for (int n : runningSums.keySet()) {
-            long sum = runningSums.get(n);
-            while (sum < timestamp + n) {
-                sum += data.get(n);
-            }
-            runningSums.put(n, sum);
-            if (sum != timestamp + n) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    void calculateMaxNumber() {
-        maxNumber = -1;
-        maxIndex = -1;
-        for (int n: data.keySet()) {
-            long value = data.get(n);
-            if (value > maxNumber) {
-                maxNumber = value;
-                maxIndex = n;
-            }
-        }
-    }
-
-
-    void calculateAdditions() {
-        runningSums = new HashMap<>();
-        additions = new HashMap<>();
-        for (int n: data.keySet()) {
-            long value = data.get(n);
-            additions.put(n,value *  maxNumber / value);
-            runningSums.put(n, value);
-        }
     }
 
     public static void main(String[] args) {
