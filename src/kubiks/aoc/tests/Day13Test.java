@@ -58,5 +58,14 @@ class Day13Test {
         assertEquals(1202161486, day13.solvePart2());
     }
 
+    @Test
+    void day13Part2() {
+        List<String> data = new ArrayList<>();
+        data.add("1000066");
+        data.add("13,x,x,41,x,x,x,37,x,x,x,x,x,659,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,19,x,x,x,23,x,x,x,x,x,29,x,409,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,17");
+        Day13 day13 = new Day13(data);
+        assertEquals(939490236001473L, day13.solvePart2());
+    }
+
 
 }

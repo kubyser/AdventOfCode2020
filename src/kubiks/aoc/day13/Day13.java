@@ -42,21 +42,20 @@ public class Day13 {
     }
 
     public long solvePart2() {
-        calculateMaxNumber();
-
-        long milestone = 1000000000L;
-        calculateAdditions();
-        long timestampMaxNumber = maxNumber;
-        while (true) {
-            if (isTimestampAcceptable(timestampMaxNumber-maxIndex)) {
-                return timestampMaxNumber-maxIndex;
+        Iterator<Integer> iterator = data.keySet().iterator();
+        int curN = iterator.next();
+        long start = data.get(curN);
+        long step = data.get(curN);
+        while (iterator.hasNext()) {
+            curN = iterator.next();
+            long curValue = data.get(curN);
+            while ((start + curN) % curValue != 0) {
+                start += step;
             }
-            timestampMaxNumber += maxNumber;
-            if (timestampMaxNumber > milestone) {
-                System.out.println(milestone);
-                milestone += 1000000000L;
-            }
+            step *= curValue;
+            //System.out.format("Completed step %d, new start=%d, new step=%d\n", curN, start, step);
         }
+        return start;
     }
 
     boolean isTimestampAcceptable(long timestamp) {
