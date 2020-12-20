@@ -7,8 +7,10 @@ import java.util.Map;
 public class MessageDecoder {
     enum RuleType {
         FINAL,
+        FINAL_LIST,
         SINGLE,
-        DOUBLE
+        DOUBLE,
+        DOUBLE_LOOP
     }
 
     Map<String, Rule> ruleSet;
@@ -19,8 +21,12 @@ public class MessageDecoder {
             if (s.length() == 0) {
                 break;
             }
-            Rule rule = new Rule(s, ruleSet);
+            new Rule(s, ruleSet);
         }
+    }
+
+    public void putRule(String rule) {
+        new Rule(rule, ruleSet);
     }
 
     public boolean stringMatchesRule(String s, String ruleId) {
@@ -28,6 +34,13 @@ public class MessageDecoder {
             System.out.format("Unknown rule ID %s\n", ruleId);
         }
         return ruleSet.get(ruleId).matchesString(s);
+    }
+
+    public void reduceRules() {
+        for (String ruleId: ruleSet.keySet()) {
+            ruleSet.get(ruleId).reduce();
+            //System.out.println(ruleSet.get(ruleId).toString());
+        }
     }
 
 }
