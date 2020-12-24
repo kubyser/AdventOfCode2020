@@ -3,7 +3,6 @@ package kubiks.aoc.day23;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public class CircularSet<T> {
 
@@ -17,8 +16,8 @@ public class CircularSet<T> {
         return start;
     }
 
-    public Set<T> getValues() {
-        return map.keySet();
+    public int getSize() {
+        return map.size();
     }
 
     public boolean contains(T element) {
@@ -40,10 +39,6 @@ public class CircularSet<T> {
 
     Node<T> get(T element) {
         return map.get(element);
-    }
-
-    public int getSize() {
-        return map.size();
     }
 
     public T getNext(T element) {
